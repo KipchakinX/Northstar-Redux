@@ -25,7 +25,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.ResultContainer;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;
@@ -172,7 +171,7 @@ public class AstronomyTableMenu extends MenuBase<AstronomyTableBlockEntity> {
         float oldScience = planet.science;
 
         planet.readings.add(new SpaceAtlasContent.AtlasReading(originPlanet.key.location(), science, day));
-        planet.recalculateScience(targetPlanet.properties.scienceWeightExp());
+        planet.recalculateScience(targetPlanet.properties.scienceDecayExp());
 
         float newScience = planet.science;
         float addedScience = newScience - oldScience;

@@ -33,11 +33,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.network.NetworkHooks;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.jetbrains.annotations.Contract;
@@ -46,7 +44,6 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -187,7 +184,7 @@ public class RocketStationMenu extends MenuBase<RocketStationHolder> {
 
             for (var entry : atlas.planets.entrySet()) {
                 Planet planet = planets.getPlanetById(entry.getKey());
-                if (planet == null || entry.getValue().science < planet.properties.requiredScience()) {
+                if (planet == null || planet.properties.requiredScience() < 0 || entry.getValue().science < planet.properties.requiredScience()) {
                     continue;
                 }
                 for (PlanetDimension dimension : planet.dimensions) {
